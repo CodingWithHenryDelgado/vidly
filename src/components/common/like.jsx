@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-
 //Input : liked: boolean
 //Output : onClick 
 
