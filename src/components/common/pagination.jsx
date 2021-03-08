@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Pagination = props => {
     // [1... pagesCount].map()
 
-    const {itemsCount, pageSize, currentPage, onPageChange} = props;
+    const {itemsCount, pageSize, currentPage} = props;
 
     console.log(currentPage);
 
@@ -19,12 +19,13 @@ const Pagination = props => {
         <ul className="pagination">
             { pages.map (page => (
                 <li key={page} className={ page === currentPage ? 'page-item active' : 'page-items'}>
-                    <a 
+                    <button
+                    href="#"
                     className="page-link"
                     onClick={() => props.onPageChange(page)}
                     >
                         {page}
-                    </a>
+                    </button>
                 </li>
             ))}
         </ul>
