@@ -4,6 +4,7 @@ import Input from "./common/input";
 class LoginForm extends Component {
 	state = {
 		account: { username: "", password: "" },
+		errors: {},
 	};
 
 	username = React.createRef();
@@ -12,10 +13,27 @@ class LoginForm extends Component {
 	// 	this.username.current.focus();
 	// }
 
+	validate = () => {
+		const errors = {};
+
+		const { account } = this.state;
+
+		if (this.state.account.username.trim() === "")
+			errors.username = "Username is required.";
+		if (this.state.account.password.trim() === "")
+			errors.password = "Password is required.";
+
+		return Object.keys(errors).length === 0 ? null : errors;
+	};
+
 	//Stop the app from doing a full page reload
 	handleSubmit = (e) => {
 		e.preventDefault();
 
+		const errors = this.validate();
+		console.log(errors);
+		this.setState({ errors });
+		if (errors) return;
 		// Call the server
 
 		//Don't do the bottom when using React, you should make a reference and then use that
