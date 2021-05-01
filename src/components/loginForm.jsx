@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import Joi from "joi-browser";
 import Input from "./common/input";
 
 class LoginForm extends Component {
 	state = {
 		account: { username: "", password: "" },
 		errors: {},
+	};
+
+	schema = {
+		username: Joi.string().required(),
+		password: Joi.string().required,
 	};
 
 	username = React.createRef();
@@ -14,6 +20,8 @@ class LoginForm extends Component {
 	// }
 
 	validate = () => {
+		Joi.validate(this.state.account, this.schema, { abortEarly: false });
+
 		const errors = {};
 
 		const { account } = this.state;
