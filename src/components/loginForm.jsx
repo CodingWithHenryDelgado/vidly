@@ -9,8 +9,8 @@ class LoginForm extends Component {
 	};
 
 	schema = {
-		username: Joi.string().required(),
-		password: Joi.string().required,
+		username: Joi.string().required().label("Username"),
+		password: Joi.string().required().label("Password"),
 	};
 
 	username = React.createRef();
@@ -20,18 +20,16 @@ class LoginForm extends Component {
 	// }
 
 	validate = () => {
-		Joi.validate(this.state.account, this.schema, { abortEarly: false });
+		const options = { abortEarly: false };
+		const { error } = Joi.validate(this.state.account, this.schema, options);
+
+		if (!error) return null;
 
 		const errors = {};
 
-		const { account } = this.state;
+		for (let item of error.details) errors[item.path[0]] = item.message;
 
-		if (this.state.account.username.trim() === "")
-			errors.username = "Username is required.";
-		if (this.state.account.password.trim() === "")
-			errors.password = "Password is required.";
-
-		return Object.keys(errors).length === 0 ? null : errors;
+		return errors;
 	};
 
 	//Stop the app from doing a full page reload
