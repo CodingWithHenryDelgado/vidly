@@ -32,8 +32,15 @@ class LoginForm extends Component {
 		return errors;
 	};
 
-	//Stop the app from doing a full page reload
+	validateProperty = ({ name, value }) => {
+		const obj = { [name]: value };
+		const schema = { [name]: this.schema[name] };
+		const { error } = Joi.validate(obj, schema);
+		return error ? error.details[0].message : null;
+	};
+
 	handleSubmit = (e) => {
+		//Stop the app from doing a full page reload
 		e.preventDefault();
 
 		const errors = this.validate();
@@ -48,17 +55,6 @@ class LoginForm extends Component {
 		const username = this.username.current.value;
 
 		console.log("");
-	};
-
-	validateProperty = ({ name, value }) => {
-		if (name === "username") {
-			if (value.trim === "") return "Username is required";
-			// ...
-		}
-		if (name === "password") {
-			if (value.trim === "") return "Password is required";
-			// ...
-		}
 	};
 
 	handleChange = ({ currentTarget: input }) => {
