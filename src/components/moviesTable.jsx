@@ -29,11 +29,11 @@ class MoviesTable extends Component {
         const { movies, onSort, sortColumn} = this.props;
 
         return ( 
-            <Table 
-                columns={this.columns} 
-                data={movies} 
-                sortColumn={sortColumn} 
-                onSort={onSort}
+                <Table 
+                    columns={this.columns} 
+                    data={movies} 
+                    sortColumn={sortColumn} 
+                    onSort={onSort}
             />
         );
     }

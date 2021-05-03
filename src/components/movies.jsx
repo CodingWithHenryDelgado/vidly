@@ -4,6 +4,7 @@ import { getGenres } from '../services/fakeGenreService';
 import Pagination from "./common/pagination";
 import {paginate} from "../utils/paginate";
 import ListGroup from "./common/listGroup";
+import { Link } from 'react-router-dom';
 import MoviesTable from './moviesTable';
 import _ from "lodash";
 
@@ -71,6 +72,8 @@ class Movies extends Component {
         const { length: count } = this.state.movies;
         const { pageSize, currentPage, sortColumn } = this.state;
 
+        
+
         if(count === 0 ) return <p>There are no movies in the database!</p>;
 
         const { totalCount, data: movies} = this.getPageData();
@@ -87,6 +90,7 @@ class Movies extends Component {
                 </div>
 
                 <div className="col">
+                    <Link to="/movies/new" className="btn btn-primary" style={{ marginBottom: 20 }}>New Movie</Link>
                     <p>Showing {totalCount} movies in the database.</p>
 
                     <MoviesTable 
