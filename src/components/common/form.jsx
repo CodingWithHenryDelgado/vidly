@@ -36,9 +36,6 @@ class Form extends Component {
 		const errors = this.validate();
 		this.setState({ errors: errors || {} });
 		if (errors) return;
-		//Don't do the bottom when using React, you should make a reference and then use that
-		//As when using React you don't want to interact with the real DOM
-		//const username = document.getElementById("username").value;
 		this.doSubmit();
 	};
 
@@ -55,7 +52,7 @@ class Form extends Component {
 		this.setState({ data, errors });
 	};
 
-	renderSelect(name, label, options) {
+	renderSelect( name, label, options ) {
 		const {data, errors } = this.state;
 
 		return (
@@ -66,18 +63,17 @@ class Form extends Component {
 				options={options}
 				onChange={this.handleChange}
 				error={errors[name]}>
-
 			</Select>
 		);
 	}
 
     renderButton(label) {
         return (<button disabled={this.validate()} className="btn btn-primary">
-        {label}
-    </button>);
+        	{label}
+    	</button>);
     }
 
-    renderInput(name, label, type = "text"){
+    renderInput( name, label, type = "text"){
         const { data, errors } = this.state;
 
         return (
